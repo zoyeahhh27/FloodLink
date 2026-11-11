@@ -1,8 +1,11 @@
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const http = require("http");
+
+dotenv.config();
 
 // =====================================================
 // SOCKET
@@ -14,28 +17,36 @@ const { initSocket } = require("./socket");
 // ROUTES
 // =====================================================
 
-const emergencyRoutes =
-  require("./routes/emergencyRoutes");
-
-const shelterRoutes =
-  require("./routes/shelterRoutes");
-
-const hazardRoutes =
-  require("./routes/hazardRoutes");
-
-const evacuationRoutes =
-  require("./routes/evacuationRoutes");
+const emergencyRoutes = require("./routes/emergencyRoutes");
+const shelterRoutes = require("./routes/shelterRoutes");
+const hazardRoutes = require("./routes/hazardRoutes");
+const evacuationRoutes = require("./routes/evacuationRoutes");
 
 // =====================================================
 // CONFIG
 // =====================================================
 
-dotenv.config();
-
 const app = express();
+const server = http.createServer(app);
 
-const server =
-  http.createServer(app);
+// =====================================================
+// CORS CONFIGURATION
+// =====================================================
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://flood-link.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+app.use(express.json());
 
 // =====================================================
 // SOCKET.IO
@@ -44,40 +55,13 @@ const server =
 initSocket(server);
 
 // =====================================================
-// MIDDLEWARE
-// =====================================================
-
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-  })
-);
-
-app.use(express.json());
-
-// =====================================================
 // API ROUTES
 // =====================================================
 
-app.use(
-  "/api/emergencies",
-  emergencyRoutes
-);
-
-app.use(
-  "/api/shelters",
-  shelterRoutes
-);
-
-app.use(
-  "/api/hazards",
-  hazardRoutes
-);
-
-app.use(
-  "/api/evacuation",
-  evacuationRoutes
-);
+app.use("/api/emergencies", emergencyRoutes);
+app.use("/api/shelters", shelterRoutes);
+app.use("/api/hazards", hazardRoutes);
+app.use("/api/evacuation", evacuationRoutes);
 
 // =====================================================
 // ROOT
@@ -85,8 +69,7 @@ app.use(
 
 app.get("/", (req, res) => {
   res.json({
-    message:
-      "FloodLink API is running 🌊🚨",
+    message: "FloodLink API is running 🌊🚨",
   });
 });
 
@@ -97,25 +80,17 @@ app.get("/", (req, res) => {
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    console.log(
-      "MongoDB connected ✅"
-    );
+    console.log("MongoDB connected ✅");
 
-    server.listen(
-      process.env.PORT,
-      () => {
-        console.log(
-          `FloodLink server running on port ${process.env.PORT} 🚀`
-        );
-      }
-    );
+    const PORT = process.env.PORT || 5050;
+
+    server.listen(PORT, () => {
+      console.log(
+        `FloodLink server running on port ${PORT} 🚀`
+      );
+    });
   })
   .catch((error) => {
-    console.error(
-      "MongoDB connection failed ❌"
-    );
-
-    console.error(
-      error.message
-    );
+    console.error("MongoDB connection failed ❌");
+    console.error(error.message);
   });
