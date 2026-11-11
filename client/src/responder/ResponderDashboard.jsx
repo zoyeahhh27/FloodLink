@@ -14,7 +14,7 @@ import { io } from "socket.io-client";
 import "leaflet/dist/leaflet.css";
 import "./ResponderDashboard.css";
 
-const API_URL = "http://localhost:5050";
+const API_URL = "https://floodlink.onrender.com";
 
 const WARANGAL_CENTER = [17.968, 79.59];
 

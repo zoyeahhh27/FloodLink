@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./CitizenDashboard.css";
 
-const API_URL = "http://localhost:5050";
+const API_URL = "https://floodlink.onrender.com";
 
 const initialForm = {
   latitude: "",
