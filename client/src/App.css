@@ -1,0 +1,328 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: #eef5f7;
+  color: #102a43;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.header {
+  height: 72px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border-bottom: 1px solid #dce7eb;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: 800;
+  color: #123c52;
+}
+
+.tagline {
+  font-size: 13px;
+  color: #718096;
+}
+
+.container {
+  width: min(900px, 92%);
+  margin: auto;
+  padding: 55px 0;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #d94f4f;
+}
+
+.hero h1 {
+  margin: 10px 0;
+  font-size: clamp(35px, 6vw, 58px);
+  line-height: 1.05;
+  letter-spacing: -2px;
+}
+
+.hero h1 span {
+  color: #287d9b;
+}
+
+.hero-text {
+  color: #637381;
+  font-size: 16px;
+  margin: 18px auto 25px;
+}
+
+.location-btn {
+  border: none;
+  padding: 13px 22px;
+  border-radius: 30px;
+  background: #dceff4;
+  color: #14536b;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.location-btn:hover {
+  background: #cce6ed;
+}
+
+.message {
+  margin: 15px auto;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #28566b;
+  max-width: 500px;
+  font-size: 14px;
+}
+
+.emergency-card {
+  background: white;
+  border-radius: 22px;
+  padding: 32px;
+  box-shadow: 0 15px 45px rgba(30, 70, 90, 0.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+.card-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #d94f4f;
+  margin: 0 0 7px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.status-dot {
+  font-size: 11px;
+  font-weight: 800;
+  color: #2c8a62;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #405563;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #d7e2e7;
+  border-radius: 11px;
+  padding: 13px;
+  outline: none;
+  background: #fbfdfe;
+  color: #17384a;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #4895b1;
+  box-shadow: 0 0 0 3px rgba(72, 149, 177, 0.1);
+}
+
+textarea {
+  resize: vertical;
+}
+
+.submit-btn {
+  width: 100%;
+  border: none;
+  border-radius: 13px;
+  padding: 17px;
+  background: #c94b4b;
+  color: white;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submit-btn:hover {
+  background: #b73f3f;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.safety-note {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 22px;
+  color: #718096;
+  font-size: 12px;
+}
+
+.safety-note p {
+  margin: 0;
+}
+
+@media (max-width: 650px) {
+  .header {
+    padding: 0 5%;
+  }
+
+  .tagline {
+    display: none;
+  }
+
+  .container {
+    padding: 35px 0;
+  }
+
+  .emergency-card {
+    padding: 22px;
+  }
+
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero h1 {
+    letter-spacing: -1px;
+  }
+}
+.role-switch {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  background: #123c52;
+}
+
+.role-switch button {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.role-switch button.active-role {
+  background: white;
+  color: #123c52;
+}
+/* =====================================================
+   FLOODLINK ROLE SWITCHER
+   ===================================================== */
+
+.role-switch {
+  position: sticky;
+  top: 0;
+
+  z-index: 2000;
+
+  height: 64px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 6px;
+
+  background: #073f42;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.role-switch button {
+  border: none;
+
+  padding: 10px 18px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.13);
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 14px;
+
+  font-weight: 750;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.role-switch button:hover {
+  background: rgba(255, 255, 255, 0.2);
+
+  color: white;
+}
+
+.role-switch button.active-role {
+  background: white;
+
+  color: #123f43;
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 480px) {
+  .role-switch {
+    height: 58px;
+  }
+
+  .role-switch button {
+    padding: 9px 14px;
+
+    font-size: 13px;
+  }
+}
